@@ -1,0 +1,360 @@
+Project(Relighting)
+
+cmake_minimum_required(VERSION 3.0.0)
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_BUILD_TYPE Debug)
+
+set(CMAKE_PREFIX_PATH 
+	"F:/thirdLib/Opencv2.4.9/opencv/build" 
+	"D:/Qt/Qt5.4.1/5.4/msvc2013_64_opengl"
+	"F:/thirdLib/boost_1_56_0"
+	)
+link_directories(F:/thirdLib/boost_1_56_0/lib64-msvc-12.0)	
+
+add_subdirectory(RelightingLine)
+
+find_package(Qt5OpenGL REQUIRED)
+find_package(Qt5Core REQUIRED)
+find_package(Qt5Gui REQUIRED)
+find_package(Qt5Widgets REQUIRED)
+find_package(Boost REQUIRED)
+include_directories(${Boost_INCLUDE_DIRS})
+include_directories(${Relighting_SOURCE_DIR}/thirdLib)
+include_directories(F:/thirdLib)
+link_directories(F:/thirdLib/gl)
+
+find_package(PCL)
+IF(NOT PCL_DIR)
+	MESSAGE(FATAL_ERROR "Please set PCL_DIR.")
+ENDIF(NOT PCL_DIR)
+include_directories(${PCL_DIR}/../include/pcl-1.7)
+include_directories(${PCL_DIR}/../3rdParty/FLANN/include)
+include_directories(${PCL_DIR}/../3rdParty/Eigen/eigen3)
+include_directories(${PCL_DIR}/../3rdParty/VTK/include/vtk-6.2)
+
+link_directories(${PCL_DIR}/../3rdParty/VTK/lib)
+link_directories(${PCL_DIR}/../lib)
+
+link_directories(${Boost_LIBRARY_DIRS})
+link_directories(${Boost_LIBRARY_DIR_DEBUG})
+link_directories(${Boost_LIBRARY_DIR_RELEASE})
+link_directories(${Relighting_SOURCE_DIR}/thirdLib/gl)
+
+include_directories(${PCL_DIR}/../3rdParty/Boost/include)
+link_directories(${PCL_DIR}/../3rdParty/Boost/lib)
+
+set(PCL_LIBS
+pcl_common_debug.lib
+pcl_common_release.lib
+pcl_features_debug.lib
+pcl_features_release.lib
+pcl_filters_debug.lib
+pcl_filters_release.lib
+pcl_io_debug.lib
+pcl_io_ply_debug.lib
+pcl_io_ply_release.lib
+pcl_io_release.lib
+pcl_kdtree_debug.lib
+pcl_kdtree_release.lib
+pcl_keypoints_debug.lib
+pcl_keypoints_release.lib
+pcl_octree_debug.lib
+pcl_octree_release.lib
+pcl_outofcore_debug.lib
+pcl_outofcore_release.lib
+pcl_people_debug.lib
+pcl_people_release.lib
+pcl_recognition_debug.lib
+pcl_recognition_release.lib
+pcl_registration_debug.lib
+pcl_registration_release.lib
+pcl_sample_consensus_debug.lib
+pcl_sample_consensus_release.lib
+pcl_search_debug.lib
+pcl_search_release.lib
+pcl_segmentation_debug.lib
+pcl_segmentation_release.lib
+pcl_surface_debug.lib
+pcl_surface_release.lib
+pcl_tracking_debug.lib
+pcl_tracking_release.lib
+pcl_visualization_debug.lib
+pcl_visualization_release.lib
+vtkalglib-6.2-gd.lib
+vtkalglib-6.2.lib
+vtkChartsCore-6.2-gd.lib
+vtkChartsCore-6.2.lib
+vtkCommonColor-6.2-gd.lib
+vtkCommonColor-6.2.lib
+vtkCommonComputationalGeometry-6.2-gd.lib
+vtkCommonComputationalGeometry-6.2.lib
+vtkCommonCore-6.2-gd.lib
+vtkCommonCore-6.2.lib
+vtkCommonDataModel-6.2-gd.lib
+vtkCommonDataModel-6.2.lib
+vtkCommonExecutionModel-6.2-gd.lib
+vtkCommonExecutionModel-6.2.lib
+vtkCommonMath-6.2-gd.lib
+vtkCommonMath-6.2.lib
+vtkCommonMisc-6.2-gd.lib
+vtkCommonMisc-6.2.lib
+vtkCommonSystem-6.2-gd.lib
+vtkCommonSystem-6.2.lib
+vtkCommonTransforms-6.2-gd.lib
+vtkCommonTransforms-6.2.lib
+vtkDICOMParser-6.2-gd.lib
+vtkDICOMParser-6.2.lib
+vtkDomainsChemistry-6.2-gd.lib
+vtkDomainsChemistry-6.2.lib
+vtkexoIIc-6.2-gd.lib
+vtkexoIIc-6.2.lib
+vtkexpat-6.2-gd.lib
+vtkexpat-6.2.lib
+vtkFiltersAMR-6.2-gd.lib
+vtkFiltersAMR-6.2.lib
+vtkFiltersCore-6.2-gd.lib
+vtkFiltersCore-6.2.lib
+vtkFiltersExtraction-6.2-gd.lib
+vtkFiltersExtraction-6.2.lib
+vtkFiltersFlowPaths-6.2-gd.lib
+vtkFiltersFlowPaths-6.2.lib
+vtkFiltersGeneral-6.2-gd.lib
+vtkFiltersGeneral-6.2.lib
+vtkFiltersGeneric-6.2-gd.lib
+vtkFiltersGeneric-6.2.lib
+vtkFiltersGeometry-6.2-gd.lib
+vtkFiltersGeometry-6.2.lib
+vtkFiltersHybrid-6.2-gd.lib
+vtkFiltersHybrid-6.2.lib
+vtkFiltersHyperTree-6.2-gd.lib
+vtkFiltersHyperTree-6.2.lib
+vtkFiltersImaging-6.2-gd.lib
+vtkFiltersImaging-6.2.lib
+vtkFiltersModeling-6.2-gd.lib
+vtkFiltersModeling-6.2.lib
+vtkFiltersParallel-6.2-gd.lib
+vtkFiltersParallel-6.2.lib
+vtkFiltersParallelImaging-6.2-gd.lib
+vtkFiltersParallelImaging-6.2.lib
+vtkFiltersProgrammable-6.2-gd.lib
+vtkFiltersProgrammable-6.2.lib
+vtkFiltersSelection-6.2-gd.lib
+vtkFiltersSelection-6.2.lib
+vtkFiltersSMP-6.2-gd.lib
+vtkFiltersSMP-6.2.lib
+vtkFiltersSources-6.2-gd.lib
+vtkFiltersSources-6.2.lib
+vtkFiltersStatistics-6.2-gd.lib
+vtkFiltersStatistics-6.2.lib
+vtkFiltersTexture-6.2-gd.lib
+vtkFiltersTexture-6.2.lib
+vtkFiltersVerdict-6.2-gd.lib
+vtkFiltersVerdict-6.2.lib
+vtkfreetype-6.2-gd.lib
+vtkfreetype-6.2.lib
+vtkftgl-6.2-gd.lib
+vtkftgl-6.2.lib
+vtkGeovisCore-6.2-gd.lib
+vtkGeovisCore-6.2.lib
+vtkgl2ps-6.2-gd.lib
+vtkgl2ps-6.2.lib
+vtkhdf5-6.2-gd.lib
+vtkhdf5-6.2.lib
+vtkhdf5_hl-6.2-gd.lib
+vtkhdf5_hl-6.2.lib
+vtkImagingColor-6.2-gd.lib
+vtkImagingColor-6.2.lib
+vtkImagingCore-6.2-gd.lib
+vtkImagingCore-6.2.lib
+vtkImagingFourier-6.2-gd.lib
+vtkImagingFourier-6.2.lib
+vtkImagingGeneral-6.2-gd.lib
+vtkImagingGeneral-6.2.lib
+vtkImagingHybrid-6.2-gd.lib
+vtkImagingHybrid-6.2.lib
+vtkImagingMath-6.2-gd.lib
+vtkImagingMath-6.2.lib
+vtkImagingMorphological-6.2-gd.lib
+vtkImagingMorphological-6.2.lib
+vtkImagingSources-6.2-gd.lib
+vtkImagingSources-6.2.lib
+vtkImagingStatistics-6.2-gd.lib
+vtkImagingStatistics-6.2.lib
+vtkImagingStencil-6.2-gd.lib
+vtkImagingStencil-6.2.lib
+vtkInfovisCore-6.2-gd.lib
+vtkInfovisCore-6.2.lib
+vtkInfovisLayout-6.2-gd.lib
+vtkInfovisLayout-6.2.lib
+vtkInteractionImage-6.2-gd.lib
+vtkInteractionImage-6.2.lib
+vtkInteractionStyle-6.2-gd.lib
+vtkInteractionStyle-6.2.lib
+vtkInteractionWidgets-6.2-gd.lib
+vtkInteractionWidgets-6.2.lib
+vtkIOAMR-6.2-gd.lib
+vtkIOAMR-6.2.lib
+vtkIOCore-6.2-gd.lib
+vtkIOCore-6.2.lib
+vtkIOEnSight-6.2-gd.lib
+vtkIOEnSight-6.2.lib
+vtkIOExodus-6.2-gd.lib
+vtkIOExodus-6.2.lib
+vtkIOExport-6.2-gd.lib
+vtkIOExport-6.2.lib
+vtkIOGeometry-6.2-gd.lib
+vtkIOGeometry-6.2.lib
+vtkIOImage-6.2-gd.lib
+vtkIOImage-6.2.lib
+vtkIOImport-6.2-gd.lib
+vtkIOImport-6.2.lib
+vtkIOInfovis-6.2-gd.lib
+vtkIOInfovis-6.2.lib
+vtkIOLegacy-6.2-gd.lib
+vtkIOLegacy-6.2.lib
+vtkIOLSDyna-6.2-gd.lib
+vtkIOLSDyna-6.2.lib
+vtkIOMINC-6.2-gd.lib
+vtkIOMINC-6.2.lib
+vtkIOMovie-6.2-gd.lib
+vtkIOMovie-6.2.lib
+vtkIONetCDF-6.2-gd.lib
+vtkIONetCDF-6.2.lib
+vtkIOParallel-6.2-gd.lib
+vtkIOParallel-6.2.lib
+vtkIOParallelXML-6.2-gd.lib
+vtkIOParallelXML-6.2.lib
+vtkIOPLY-6.2-gd.lib
+vtkIOPLY-6.2.lib
+vtkIOSQL-6.2-gd.lib
+vtkIOSQL-6.2.lib
+vtkIOVideo-6.2-gd.lib
+vtkIOVideo-6.2.lib
+vtkIOXML-6.2-gd.lib
+vtkIOXML-6.2.lib
+vtkIOXMLParser-6.2-gd.lib
+vtkIOXMLParser-6.2.lib
+vtkjpeg-6.2-gd.lib
+vtkjpeg-6.2.lib
+vtkjsoncpp-6.2-gd.lib
+vtkjsoncpp-6.2.lib
+vtklibxml2-6.2-gd.lib
+vtklibxml2-6.2.lib
+vtkmetaio-6.2-gd.lib
+vtkmetaio-6.2.lib
+vtkNetCDF-6.2-gd.lib
+vtkNetCDF-6.2.lib
+vtkNetCDF_cxx-6.2-gd.lib
+vtkNetCDF_cxx-6.2.lib
+vtkoggtheora-6.2-gd.lib
+vtkoggtheora-6.2.lib
+vtkParallelCore-6.2-gd.lib
+vtkParallelCore-6.2.lib
+vtkpng-6.2-gd.lib
+vtkpng-6.2.lib
+vtkproj4-6.2-gd.lib
+vtkproj4-6.2.lib
+vtkRenderingAnnotation-6.2-gd.lib
+vtkRenderingAnnotation-6.2.lib
+vtkRenderingContext2D-6.2-gd.lib
+vtkRenderingContext2D-6.2.lib
+vtkRenderingContextOpenGL-6.2-gd.lib
+vtkRenderingContextOpenGL-6.2.lib
+vtkRenderingCore-6.2-gd.lib
+vtkRenderingCore-6.2.lib
+vtkRenderingFreeType-6.2-gd.lib
+vtkRenderingFreeType-6.2.lib
+vtkRenderingFreeTypeOpenGL-6.2-gd.lib
+vtkRenderingFreeTypeOpenGL-6.2.lib
+vtkRenderingGL2PS-6.2-gd.lib
+vtkRenderingGL2PS-6.2.lib
+vtkRenderingImage-6.2-gd.lib
+vtkRenderingImage-6.2.lib
+vtkRenderingLabel-6.2-gd.lib
+vtkRenderingLabel-6.2.lib
+vtkRenderingLIC-6.2-gd.lib
+vtkRenderingLIC-6.2.lib
+vtkRenderingLOD-6.2-gd.lib
+vtkRenderingLOD-6.2.lib
+vtkRenderingOpenGL-6.2-gd.lib
+vtkRenderingOpenGL-6.2.lib
+vtkRenderingVolume-6.2-gd.lib
+vtkRenderingVolume-6.2.lib
+vtkRenderingVolumeOpenGL-6.2-gd.lib
+vtkRenderingVolumeOpenGL-6.2.lib
+vtksqlite-6.2-gd.lib
+vtksqlite-6.2.lib
+vtksys-6.2-gd.lib
+vtksys-6.2.lib
+vtktiff-6.2-gd.lib
+vtktiff-6.2.lib
+vtkverdict-6.2-gd.lib
+vtkverdict-6.2.lib
+vtkViewsContext2D-6.2-gd.lib
+vtkViewsContext2D-6.2.lib
+vtkViewsCore-6.2-gd.lib
+vtkViewsCore-6.2.lib
+vtkViewsInfovis-6.2-gd.lib
+vtkViewsInfovis-6.2.lib
+vtkzlib-6.2-gd.lib
+vtkzlib-6.2.lib
+)
+	
+set(RelightLineDir "${Relighting_SOURCE_DIR}/RelightingLine" CACHE PATH "Directory to calculate the direct of light")
+INCLUDE_DIRECTORIES(${RelightLineDir})
+
+file(GLOB ALL_SOURCES
+	data.*
+	environmentwidget.*
+	glm.*
+	GLWidget.*
+	lightwidget.*
+	main.cpp
+	mainGLWidget.*
+	mainwin.*
+	model.*
+	objdata.*
+	InputDialog.*
+	)
+	
+set(MISTUDIO_HEADERS
+	data.h
+	environmentwidget.h
+	glm.h
+	GLWidget.h
+	lightwidget.h
+	mainGLWidget.h
+	mainwin.h
+	model.h
+	objdata.h
+	InputDialog.h
+	)
+	
+set(MISTUDIO_UIS
+	mainwin.ui
+	)
+	
+set(MISTUDIO_QRCS mainwin.qrc)
+
+QT5_WRAP_CPP (MISTUDIO_HEADERS_MOC ${MISTUDIO_HEADERS})
+QT5_WRAP_UI (MISTUDIO_UIS_UIC ${MISTUDIO_UIS})
+QT5_ADD_RESOURCES (MISTUDIO_QRC_RCC ${MISTUDIO_QRCS})
+
+ADD_EXECUTABLE(Relighting
+	${ALL_SOURCES}
+	${MISTUDIO_HEADERS_MOC}
+	${MISTUDIO_UIS_UIC}
+	${MISTUDIO_QRC_RCC}	
+	mainwin.qrc
+	)	
+	
+TARGET_LINK_LIBRARIES(Relighting
+	Qt5::Widgets
+	Qt5::Gui
+	Qt5::Core
+	Qt5::OpenGL
+	${PCL_LIBS}
+	RelightingLine
+#	${VTK_LIBS}
+	)	
