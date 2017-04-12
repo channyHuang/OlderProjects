@@ -1,0 +1,1 @@
+“¿¿µø‚£∫Qt5, QWT, OpenGL
